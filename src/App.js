@@ -10,7 +10,7 @@ import Cart from './pages/Cart';
 function App() {
   return (
     <BrowserRouter>
-      <div className='App relative bg-slate-50'>
+      <div className='App h-screen w-full relative flex flex-row justify-center'>
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/login' element={<Login />} />
