@@ -17,7 +17,7 @@ const Home = memo(() => {
               모든 신발.
             </p>
             <p className='text-4xl lg:text-5xl font-bold text-teal-700 leading-snug md:leading-normal lg:leading-normal mb-6 md:mb-10'>
-              Shoe-Shop
+              SHOE SHOP.
             </p>
             <Link
               to='/item'
