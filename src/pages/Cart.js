@@ -3,9 +3,9 @@ import Header from '../components/Header';
 
 const Cart = memo(() => {
   return (
-    <div>
-      <Header></Header>
-    </div>
+    <>
+      <Header />
+    </>
   );
 });
 
