@@ -38,7 +38,7 @@ const Login = memo(() => {
               type='password'
             />
           </div>
-          <button className='w-full bg-slate-700 text-white text-base sm:text-lg font-semibold py-3 px-20 mb-8 rounded-lg'>
+          <button className='w-full bg-slate-800 text-white text-base sm:text-lg font-bold py-3 mb-8 rounded-lg'>
             로그인
           </button>
           <div className='flex flex-row justify-center mb-2'>
@@ -46,8 +46,8 @@ const Login = memo(() => {
               아직 회원이 아니신가요?
             </p>
             <Link
-              to='/join'
-              className='text-sm sm:text-base text-slate-700 font-medium underline pl-3'>
+              to=''
+              className='text-sm sm:text-base text-slate-800 font-medium underline pl-3'>
               회원가입
             </Link>
           </div>

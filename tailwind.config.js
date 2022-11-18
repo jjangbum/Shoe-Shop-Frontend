@@ -11,7 +11,7 @@ module.exports = {
       keyframes: {
         bounceSlow: {
           '0%, 100%': {
-            transform: 'translateY(-3%)',
+            transform: 'translateY(-6%)',
             animationTimingFunction: 'cubic-bezier(0.5,0,0,0)',
           },
           '50%': {
