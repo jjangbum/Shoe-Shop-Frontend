@@ -8,7 +8,7 @@ const Home = memo(() => {
       <Header />
       <div className='h-screen w-full flex justify-center bg-gradient-to-b from-slate-50 via-slate-100 to-blue-200'>
         <div className='h-screen w-10/12 md:w-10/12 xl:w-8/12 2xl:w-7/12 block md:flex md:flex-row justify-center'>
-          <div className='h-auto w-11/12 sm:w-1/2 md:w-1/2 flex flex-col justify-center md:ml-16 xl:ml-14 mt-32 md:mt-0'>
+          <div className='h-auto w-11/12 sm:w-1/2 md:w-1/2 flex flex-col justify-center md:ml-14 lg:ml-28 xl:ml-10 mt-32 md:mt-0'>
             <p className='text-3xl md:text-4xl lg:text-5xl font-bold text-slate-800 leading-snug md:leading-snug lg:leading-snug'>
               세상의
             </p>
@@ -16,7 +16,7 @@ const Home = memo(() => {
               모든 신발
             </p>
             <p className='text-3xl md:text-4xl lg:text-5xl font-bold text-teal-700 leading-snug md:leading-snug lg:leading-snug mb-6 md:mb-10'>
-              Shoe-Shop.
+              SHOE-SHOP.
             </p>
             <Link
               to='/item'
@@ -30,7 +30,7 @@ const Home = memo(() => {
                 'https://cdn3d.iconscout.com/3d/premium/thumb/shoes-for-sale-6632021-5504118.png'
               }
               alt='shopping'
-              className='h-64 w-64 sm:h-72 sm:w-72 lg:h-88 lg:w-88 xl:h-auto xl:w-auto animate-bounce-slow'
+              className='h-64 w-64 sm:h-72 sm:w-72 lg:h-80 lg:w-80 xl:h-auto xl:w-auto animate-bounce-slow'
             />
           </div>
         </div>
