@@ -7,7 +7,7 @@ const Header = memo(() => {
   const loggedIn = false;
 
   return (
-    <header className='flex items-center justify-between w-full px-6 lg:px-40 py-4 fixed z-10 border-b border-slate-200 drop-shadow-sm'>
+    <header className='flex items-center justify-between w-full px-6 lg:px-40 py-4 fixed z-1000 border-b border-slate-200 drop-shadow-sm bg-slate-50'>
       <div className='flex flex-row items-center'>
         <Link to='/'>
           <img src={Logo} alt='logo' className=' h-7 w-7 sm:h-8 sm:w-8' />
