@@ -1,8 +1,8 @@
-import React, { memo, Fragment } from 'react';
+import React, { memo, useState, useEffect, Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
-import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 function classNames(...classes) {
@@ -10,7 +10,7 @@ function classNames(...classes) {
 }
 
 const Items = memo(() => {
-  const itemArr = [
+  const [items, setItems] = useState([
     {
       index: 1,
       name: '나이키 덩크 로우 SP 바시티 로열 (2022)',
@@ -191,11 +191,20 @@ const Items = memo(() => {
       type: '뉴발란스',
       img: 'https://img.soldout.co.kr/items/2020/11/03/69c2ddbf-00a3-440d-8734-6e308f3d7815.png/soldout/resize/564x564/optimize',
     },
-  ];
-
+  ]);
+  useEffect(() => {
+    const getItems = async () => {
+      await axios
+        .get('localhost:3002/item')
+        .then((res) => {
+          setItems(res.data);
+        })
+        .catch((err) => {});
+    };
+    getItems();
+  }, []);
   return (
     <>
-      <Header />
       <div className='h-full w-full flex justify-center'>
         <div className='h-full w-3/4 flex flex-col justify-center'>
           <div className='font-bold text-4xl sm:text-5xl mt-32 text-center mb-10'>
@@ -267,7 +276,7 @@ const Items = memo(() => {
             </Menu>
           </div>
           <ul className='w-full grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-8'>
-            {itemArr.map((item) => (
+            {items.map((item) => (
               <Link to={`/item/${item.index}`} key={item.index}>
                 <li className='h-auto w-auto rounded-md drop-shadow-md hover:bg-gray-200 hover:drop-shadow-none hover:bg-opacity-60 p-4'>
                   <div className='flex justify-center bg-stone-100 rounded-md mb-3'>

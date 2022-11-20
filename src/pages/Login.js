@@ -1,8 +1,32 @@
-import React, { memo } from 'react';
+import React, { memo, useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import Logo from '../assets/xing.png';
 
-const Login = memo(() => {
+const Login = memo(({ handleLoggedIn }) => {
+  const [id, setId] = useState('');
+  const [pw, setIPw] = useState('');
+
+  const handleId = (e) => {
+    setId(e.target.value);
+  };
+  const handlePw = (e) => {
+    setIPw(e.target.value);
+  };
+  // 로그인
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    await axios
+      .post('localhost:3002/login', { id, pw })
+      .then(() => {
+        handleLoggedIn(true);
+      })
+      .catch((err) => {
+        window.alert('아이디 또는 비밀번호가 일치하지 않습니다.');
+        console.log(err);
+      });
+  };
+
   return (
     <div className='h-screen w-full flex justify-center'>
       <div className='h-full w-2/3 sm:w-3/4 flex flex-col justify-center items-center'>
@@ -15,7 +39,7 @@ const Login = memo(() => {
             />
           </Link>
         </div>
-        <form className='w-full max-w-sm' action='/user/login' method='post'>
+        <form className='w-full max-w-sm' onSubmit={handleLogin}>
           <div className='mb-2 sm:mb-4'>
             <label
               htmlFor='id'
@@ -23,9 +47,12 @@ const Login = memo(() => {
               아이디
             </label>
             <input
+              autoComplete='off'
               id='id'
-              className='mt-2 appearance-none text-neutral-800 bg-white rounded-md block w-full px-3 h-10 shadow-sm text-base sm:text-lg focus:outline-none placeholder:text-neutral-400 focus:ring-blue-500 focus:ring-2 ring-1 ring-neutral-200'
+              className='mt-2 appearance-none text-neutral-800 bg-white rounded-md block w-full px-3 h-10 shadow-sm text-base sm:text-lg focus:outline-none placeholder:text-neutral-400 focus:ring-neutral-500 focus:ring-1 ring-1 ring-neutral-200'
               type='text'
+              value={id}
+              onChange={handleId}
             />
           </div>
           <div className='mb-12 sm:mb-16'>
@@ -35,12 +62,17 @@ const Login = memo(() => {
               비밀번호
             </label>
             <input
+              autoComplete='off'
               id='pw'
-              className='mt-2 appearance-none text-neutral-900 bg-white rounded-md block w-full px-3 h-10 shadow-sm text-base sm:text-lg focus:outline-none placeholder:text-neutral-400 focus:ring-blue-500 focus:ring-2 ring-1 ring-neutral-200'
+              className='mt-2 appearance-none text-neutral-900 bg-white rounded-md block w-full px-3 h-10 shadow-sm text-base sm:text-lg focus:outline-none placeholder:text-neutral-400 focus:ring-neutral-500 focus:ring-1 ring-1 ring-neutral-200'
               type='password'
+              value={pw}
+              onChange={handlePw}
             />
           </div>
-          <button className='w-full bg-neutral-800 text-white text-base sm:text-lg font-bold py-3 mb-8 rounded-lg hover:opacity-90 shadow-lg'>
+          <button
+            type='submit'
+            className='w-full bg-neutral-800 text-white text-base sm:text-lg font-bold py-3 mb-8 rounded-lg hover:opacity-90 shadow-lg'>
             로그인
           </button>
           <div className='flex flex-row justify-center mb-2'>

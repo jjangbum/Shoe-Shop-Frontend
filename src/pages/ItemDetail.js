@@ -1,10 +1,12 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useState, useEffect } from 'react';
 import { useParams } from 'react-router';
-import Header from '../components/Header';
-import Modal from '../components/Modal';
+import axios from 'axios';
+import CartModal from '../components/CartModal';
 
-const ItemDetail = memo(({ match }) => {
-  const itemArr = [
+const ItemDetail = memo(() => {
+  const [modalState, setModalState] = useState(false);
+  const [item, setItem] = useState();
+  const [items, setItems] = useState([
     {
       index: 1,
       name: '나이키 덩크 로우 SP 바시티 로열 (2022)',
@@ -185,41 +187,50 @@ const ItemDetail = memo(({ match }) => {
       type: '뉴발란스',
       img: 'https://img.soldout.co.kr/items/2020/11/03/69c2ddbf-00a3-440d-8734-6e308f3d7815.png/soldout/resize/564x564/optimize',
     },
-  ];
-  const { id } = useParams();
-  const item = itemArr[id - 1];
-
-  const [modal, setModal] = useState(false);
+  ]);
+  // 장바구니에 담기
   const handleModal = () => {
-    setModal(!modal);
+    setModalState(!modalState);
   };
+  const { id } = useParams();
+  const i = items[id - 1];
 
+  useEffect(() => {
+    const getItems = async () => {
+      await axios
+        .get(`localhost:3002/item/${id}`)
+        .then((res) => {
+          setItem(res.data);
+        })
+        .catch((err) => {});
+    };
+    getItems();
+  }, []);
   return (
     <>
-      <Header />
       <div className='h-screen w-full flex justify-center'>
         <div className='h-auto w-3/4 lg:w-4/5 flex flex-col md:flex-row justify-evenly md:justify-evenly md:mt-8'>
           <div className='h-auto xl:w-5/12 flex items-center justify-center'>
             <div className='h-[320px] w-[320px] md:h-auto md:w-auto lg:h-[480px] lg:w-[480px] 2xl:h-[520px] 2xl:w-[520px] max-h-[520px] max-w-[520px] xl:-ml-8 md:mr-8 bg-stone-100 rounded-md flex justify-center drop-shadow-md'>
-              <img src={item.img} alt='img' />
+              <img src={i.img} alt='img' />
             </div>
           </div>
           <div className='h-auto xl:w-5/12 flex flex-col justify-center 2xl:px-8'>
             <div className='font-bold text-base xl:text-lg text-neutral-800 underline md:border-t md:pt-16 border-neutral-300'>
-              {item.brand}
+              {i.brand}
             </div>
             <div className='text-base xl:text-lg text-neutral-500'>
-              {item.type}
+              {i.type}
             </div>
             <p className='font-medium text-lg xl:text-xl text-neutral-900'>
-              {item.name}
+              {i.name}
             </p>
             <div className='flex justify-between mt-10'>
               <span className='text-base xl:text-lg text-neutral-500 align-middle'>
                 가격
               </span>
               <span className='font-bold text-xl xl:text-2xl text-neutral-900 pr-1'>
-                {item.price.toLocaleString()}원
+                {i.price.toLocaleString()}원
               </span>
             </div>
             <div className='flex flex-col xl:flex-row justify-center items-center mt-10 md:border-b md:pb-16 border-neutral-300'>
@@ -235,7 +246,7 @@ const ItemDetail = memo(({ match }) => {
           </div>
         </div>
       </div>
-      {modal ? <Modal handleModal={handleModal} /> : null}
+      {modalState ? <CartModal handleModal={handleModal} /> : null}
     </>
   );
 });

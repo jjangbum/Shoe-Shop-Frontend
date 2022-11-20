@@ -1,24 +1,16 @@
-import React, { memo, Fragment } from 'react';
+import React, { memo, Fragment, useState, useEffect } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
-import Header from '../components/Header';
+import axios from 'axios';
 import Footer from '../components/Footer';
+import OrderModal from '../components/OrderModal';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
 const Cart = memo(() => {
-  const sizeArr = [
-    '230mm',
-    '240mm',
-    '250mm',
-    '260mm',
-    '270mm',
-    '280mm',
-    '290mm',
-  ];
-  const cartArr = [
+  const [items, setItems] = useState([
     {
       index: 1,
       name: '나이키 덩크 로우 SP 바시티 로열 (2022)',
@@ -91,18 +83,58 @@ const Cart = memo(() => {
       type: '뉴발란스',
       img: 'https://img.soldout.co.kr/items/2020/11/03/69c2ddbf-00a3-440d-8734-6e308f3d7815.png/soldout/resize/564x564/optimize',
     },
+  ]);
+  const [modalState, setModalState] = useState(false);
+  const sizeArr = [
+    '230mm',
+    '240mm',
+    '250mm',
+    '260mm',
+    '270mm',
+    '280mm',
+    '290mm',
   ];
-
-  const itemSum = cartArr.reduce(
+  const itemSum = items.reduce(
     (accumulator, currentValue) => accumulator + parseInt(currentValue.price),
     0
   );
   const shipping = itemSum >= 50000 ? 0 : 3000;
   const totalPrice = itemSum + shipping;
+  // 주문하기
+  const handleOrder = async () => {
+    setModalState(!modalState);
+    await axios
+      .post('localhost:3002/order', items)
+      .then((res) => {})
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  // 장바구니 삭제
+  const handleRemove = async (id) => {
+    await axios
+      .post('localhost:3002/cart', { id })
+      .then((res) => {})
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  useEffect(() => {
+    const getItems = async () => {
+      await axios
+        .get('localhost:3002/cart')
+        .then((res) => {
+          setItems(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    getItems();
+  }, []);
 
   return (
     <>
-      <Header />
       <div className='h-full w-full flex flex-col justify-center items-center'>
         <div className='h-auto w-5/6 sm:w-3/4 xl:w-4/5 mt-28'>
           <div className='drop-shadow-md'>
@@ -110,7 +142,7 @@ const Cart = memo(() => {
           </div>
           <div className='flex flex-col xl:flex-row h-full w-full xl:border-b border-b-neutral-300 justify-evenly items-center xl:items-start'>
             <ul className='h-full w-full sm:w-4/5 xl:w-7/12 mt-10 mb-10 xl:mb-0'>
-              {cartArr.map((item) => (
+              {items.map((item) => (
                 <li
                   key={item.index}
                   className='flex border-t border-t-neutral-200 py-8 px-4'>
@@ -123,9 +155,7 @@ const Cart = memo(() => {
                   </div>
                   <div className='h-auto w-full flex flex-col justify-between pl-10'>
                     <div className='flex justify-end -mt-1 mb-1'>
-                      <button
-                        type='button'
-                        className='-m-2 p-2 text-gray-400 hover:text-gray-500'>
+                      <button className='-m-2 p-2 text-gray-400 hover:text-gray-500'>
                         <svg
                           className='h-6 w-6'
                           xmlns='http://www.w3.org/2000/svg'
@@ -133,7 +163,10 @@ const Cart = memo(() => {
                           viewBox='0 0 24 24'
                           strokeWidth='1.5'
                           stroke='currentColor'
-                          aria-hidden='true'>
+                          aria-hidden='true'
+                          onClick={() => {
+                            handleRemove(item.index);
+                          }}>
                           <path
                             strokeLinecap='round'
                             strokeLinejoin='round'
@@ -216,7 +249,9 @@ const Cart = memo(() => {
                 <span>{totalPrice.toLocaleString()} 원</span>
               </div>
               <div className='mt-5'>
-                <button className='w-full bg-teal-700 text-neutral-50 font-semibold text-lg rounded-lg hover:opacity-90 py-2'>
+                <button
+                  className='w-full bg-teal-700 text-neutral-50 font-semibold text-lg rounded-lg hover:opacity-90 py-2'
+                  onClick={handleOrder}>
                   주문하기
                 </button>
               </div>
@@ -225,6 +260,7 @@ const Cart = memo(() => {
           <Footer />
         </div>
       </div>
+      {modalState ? <OrderModal /> : null}
     </>
   );
 });
