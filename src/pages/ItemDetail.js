@@ -1,6 +1,7 @@
-import React, { memo } from 'react';
+import React, { memo, useState } from 'react';
 import { useParams } from 'react-router';
 import Header from '../components/Header';
+import Modal from '../components/Modal';
 
 const ItemDetail = memo(({ match }) => {
   const itemArr = [
@@ -188,18 +189,23 @@ const ItemDetail = memo(({ match }) => {
   const { id } = useParams();
   const item = itemArr[id - 1];
 
+  const [modal, setModal] = useState(false);
+  const handleModal = () => {
+    setModal(!modal);
+  };
+
   return (
     <>
       <Header />
       <div className='h-screen w-full flex justify-center'>
         <div className='h-auto w-3/4 lg:w-4/5 flex flex-col md:flex-row justify-evenly md:justify-evenly md:mt-8'>
           <div className='h-auto xl:w-5/12 flex items-center justify-center'>
-            <div className='h-[320px] w-[320px] md:h-auto md:w-auto lg:h-[480px] lg:w-[480px] 2xl:h-[520px] 2xl:w-[520px] max-h-[520px] max-w-[520px] xl:-ml-8 md:mr-8 bg-stone-100 rounded-md flex justify-center'>
+            <div className='h-[320px] w-[320px] md:h-auto md:w-auto lg:h-[480px] lg:w-[480px] 2xl:h-[520px] 2xl:w-[520px] max-h-[520px] max-w-[520px] xl:-ml-8 md:mr-8 bg-stone-100 rounded-md flex justify-center drop-shadow-md'>
               <img src={item.img} alt='img' />
             </div>
           </div>
           <div className='h-auto xl:w-5/12 flex flex-col justify-center 2xl:px-8'>
-            <div className='font-bold text-base xl:text-lg text-neutral-800 underline md:border-t md:pt-16 border-neutral-400'>
+            <div className='font-bold text-base xl:text-lg text-neutral-800 underline md:border-t md:pt-16 border-neutral-300'>
               {item.brand}
             </div>
             <div className='text-base xl:text-lg text-neutral-500'>
@@ -216,17 +222,20 @@ const ItemDetail = memo(({ match }) => {
                 {item.price.toLocaleString()}원
               </span>
             </div>
-            <div className='flex flex-col xl:flex-row justify-center items-center mt-10 md:border-b md:pb-16 border-neutral-400'>
-              <button className='w-full bg-teal-700 text-neutral-100 font-semibold text-base xl:text-lg max-w-[280px] py-3 rounded-lg mx-1 mb-2 xl:mb-0 hover:opacity-90'>
+            <div className='flex flex-col xl:flex-row justify-center items-center mt-10 md:border-b md:pb-16 border-neutral-300'>
+              <button className='w-full bg-teal-700 text-neutral-100 font-semibold text-base xl:text-lg max-w-[280px] py-3 rounded-lg mx-1 mb-2 xl:mb-0 hover:opacity-90 shadow-md'>
                 구매하기
               </button>
-              <button className='w-full bg-neutral-800 text-neutral-100 font-semibold text-base xl:text-lg max-w-[280px] py-3 rounded-lg mx-1 hover:opacity-90'>
+              <button
+                className='w-full bg-neutral-800 text-neutral-100 font-semibold text-base xl:text-lg max-w-[280px] py-3 rounded-lg mx-1 hover:opacity-90 shadow-md'
+                onClick={handleModal}>
                 장바구니에 담기
               </button>
             </div>
           </div>
         </div>
       </div>
+      {modal ? <Modal handleModal={handleModal} /> : null}
     </>
   );
 });

@@ -202,7 +202,7 @@ const Items = memo(() => {
             SHOP
           </div>
           <div className='flex justify-end mb-1'>
-            <Menu as='div' className='relative inline-block z-0'>
+            <Menu as='div' className='relative inline-block z-10'>
               <div>
                 <Menu.Button className='inline-flex w-full justify-center px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-50 focus:outline-none'>
                   최근 인기순
@@ -268,8 +268,8 @@ const Items = memo(() => {
           </div>
           <ul className='w-full grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-8'>
             {itemArr.map((item) => (
-              <li key={item.index} className='h-auto w-auto'>
-                <Link to={`/item/${item.index}`}>
+              <Link to={`/item/${item.index}`} key={item.index}>
+                <li className='h-auto w-auto rounded-md drop-shadow-md hover:bg-gray-200 hover:drop-shadow-none hover:bg-opacity-60 p-4'>
                   <div className='flex justify-center bg-stone-100 rounded-md mb-3'>
                     <img src={item.img} alt='img' className='h-52 w-52 p-1' />
                   </div>
@@ -284,8 +284,8 @@ const Items = memo(() => {
                       {item.price.toLocaleString()}원
                     </p>
                   </div>
-                </Link>
-              </li>
+                </li>
+              </Link>
             ))}
           </ul>
           <Footer />

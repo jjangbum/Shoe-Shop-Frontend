@@ -7,7 +7,7 @@ const Home = memo(() => {
     <>
       <Header />
       <div className='h-screen w-full flex justify-center bg-gradient-to-b from-neutral-50 via-neutral-100 to-blue-200'>
-        <div className='h-auto w-10/12 md:w-10/12 xl:w-8/12 2xl:w-7/12 block md:flex md:flex-row justify-center'>
+        <div className='h-auto w-10/12 md:w-10/12 xl:w-8/12 2xl:w-7/12 block md:flex md:flex-row justify-center drop-shadow-lg'>
           <div className='h-auto w-11/12 sm:w-1/2 md:w-1/2 flex flex-col justify-center md:ml-14 lg:ml-28 xl:ml-10 mt-32 md:mt-0'>
             <p className='text-3xl md:text-4xl lg:text-5xl font-bold text-neutral-800 leading-snug md:leading-snug lg:leading-snug'>
               세상의

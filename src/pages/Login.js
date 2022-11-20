@@ -40,7 +40,7 @@ const Login = memo(() => {
               type='password'
             />
           </div>
-          <button className='w-full bg-neutral-800 text-white text-base sm:text-lg font-bold py-3 mb-8 rounded-lg hover:opacity-90'>
+          <button className='w-full bg-neutral-800 text-white text-base sm:text-lg font-bold py-3 mb-8 rounded-lg hover:opacity-90 shadow-lg'>
             로그인
           </button>
           <div className='flex flex-row justify-center mb-2'>
