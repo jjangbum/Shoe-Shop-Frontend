@@ -49,7 +49,7 @@ const Login = memo(() => {
             </p>
             <Link
               to=''
-              className='text-sm sm:text-base text-neutral-900 font-medium underline pl-3 hover:opacity-60'>
+              className='text-sm sm:text-base text-neutral-900 font-medium underline pl-3 hover:opacity-50'>
               회원가입
             </Link>
           </div>

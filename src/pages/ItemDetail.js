@@ -194,7 +194,7 @@ const ItemDetail = memo(({ match }) => {
       <div className='h-screen w-full flex justify-center'>
         <div className='h-auto w-3/4 lg:w-4/5 flex flex-col md:flex-row justify-evenly md:justify-evenly md:mt-8'>
           <div className='h-auto xl:w-5/12 flex items-center justify-center'>
-            <div className='h-[320px] w-[320px] md:h-auto md:w-auto xl:max-h-[560px] xl:max-w-[560px] xl:-ml-8 md:mr-8 bg-stone-100 rounded-md'>
+            <div className='h-[320px] w-[320px] md:h-auto md:w-auto lg:h-[480px] lg:w-[480px] 2xl:h-[520px] 2xl:w-[520px] max-h-[520px] max-w-[520px] xl:-ml-8 md:mr-8 bg-stone-100 rounded-md flex justify-center'>
               <img src={item.img} alt='img' />
             </div>
           </div>
