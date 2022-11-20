@@ -9,4 +9,11 @@ body,
   font-family: 'Spoqa Han Sans';
   -webkit-font-smoothing: antialiased;
   height: 100vh;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }
