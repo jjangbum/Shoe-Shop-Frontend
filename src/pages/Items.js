@@ -270,14 +270,14 @@ const Items = memo(() => {
             {itemArr.map((item) => (
               <li key={item.index} className='h-auto w-auto'>
                 <Link to={`/item/${item.index}`}>
-                  <div className='flex justify-center bg-gray-100 rounded-md mb-3'>
+                  <div className='flex justify-center bg-stone-100 rounded-md mb-3'>
                     <img src={item.img} alt='img' className='h-52 w-52 p-1' />
                   </div>
                   <div className='flex flex-col justify-center items-start w-auto px-0.5'>
-                    <p className='text-sm font-semibold text-gray-900 mb-1'>
+                    <p className='text-sm font-semibold text-neutral-900 mb-1'>
                       {item.brand}
                     </p>
-                    <p className='text-gray-500 text-sm font-medium w-full mb-1'>
+                    <p className='text-neutral-500 text-sm font-medium w-full mb-1'>
                       {item.name}
                     </p>
                     <p className='text-base text-gray-900 font-semibold'>

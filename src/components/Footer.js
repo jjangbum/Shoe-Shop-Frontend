@@ -2,7 +2,7 @@ import React from 'react';
 
 const Footer = () => {
   return (
-    <footer className='flex justify-center flex-col mt-32 border-t border-slate-300 py-10 mb-5'>
+    <footer className='flex justify-center flex-col mt-32 border-t border-neutral-300 py-10 mb-5'>
       <p className='text-base text-gray-800 font-semibold pb-3'>(주) 슈샵</p>
       <div className='text-sm text-gray-600'>
         <span className='pr-5'>주식회사 슈샵 (SHOE-SHOP)</span>
