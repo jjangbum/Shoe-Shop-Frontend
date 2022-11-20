@@ -4,10 +4,10 @@ import Logo from '../assets/xing.png';
 import Menu from '../assets/menu.png';
 
 const Header = memo(() => {
-  const loggedIn = false;
+  const loggedIn = true;
 
   return (
-    <header className='flex items-center justify-between w-full px-6 lg:px-40 py-4 fixed z-1000 border-b border-slate-200 drop-shadow-sm bg-slate-50'>
+    <header className='flex items-center justify-between w-full px-6 lg:px-40 py-4 fixed z-10 border-b border-slate-300 drop-shadow-sm bg-slate-50'>
       <div className='flex flex-row items-center'>
         <Link to='/'>
           <img src={Logo} alt='logo' className=' h-7 w-7 sm:h-8 sm:w-8' />
@@ -22,15 +22,20 @@ const Header = memo(() => {
         {!loggedIn ? (
           <Link
             to='/login'
-            className='text-slate-900 text-lg font-medium px-4 py-3 rounded-md hover:bg-slate-100'>
+            className='text-slate-900 text-lg font-medium px-4 py-2 rounded-md hover:bg-gray-200'>
             로그인
           </Link>
         ) : (
-          <Link
-            to='/cart'
-            className='text-slate-900 text-lg font-medium px-4 py-3 rounded-md hover:bg-slate-100'>
-            장바구니
-          </Link>
+          <>
+            <Link
+              to='/cart'
+              className='text-slate-900 text-lg font-medium px-4 py-2 rounded-md hover:bg-gray-200'>
+              장바구니
+            </Link>
+            <Link className='text-slate-900 text-lg font-medium px-4 py-2 rounded-md hover:bg-gray-200'>
+              로그아웃
+            </Link>
+          </>
         )}
       </div>
     </header>

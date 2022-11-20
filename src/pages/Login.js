@@ -7,11 +7,13 @@ const Login = memo(() => {
     <div className='h-screen w-full flex justify-center'>
       <div className='h-full w-2/3 sm:w-3/4 flex flex-col justify-center items-center'>
         <div className='flex flex-row items-center justify-start mb-12 sm:mb-16 w-full max-w-sm'>
-          <img
-            src={Logo}
-            alt='logo'
-            className=' h-10 w-10 sm:h-12 sm:w-12 mr-3'
-          />
+          <Link to='/'>
+            <img
+              src={Logo}
+              alt='logo'
+              className=' h-10 w-10 sm:h-12 sm:w-12 mr-3'
+            />
+          </Link>
         </div>
         <form className='w-full max-w-sm' action='/user/login' method='post'>
           <div className='mb-2 sm:mb-4'>
@@ -38,7 +40,7 @@ const Login = memo(() => {
               type='password'
             />
           </div>
-          <button className='w-full bg-slate-800 text-white text-base sm:text-lg font-bold py-3 mb-8 rounded-lg'>
+          <button className='w-full bg-slate-800 text-white text-base sm:text-lg font-bold py-3 mb-8 rounded-lg hover:opacity-90'>
             로그인
           </button>
           <div className='flex flex-row justify-center mb-2'>
@@ -47,7 +49,7 @@ const Login = memo(() => {
             </p>
             <Link
               to=''
-              className='text-sm sm:text-base text-slate-800 font-medium underline pl-3'>
+              className='text-sm sm:text-base text-slate-900 font-medium underline pl-3 hover:opacity-60'>
               회원가입
             </Link>
           </div>

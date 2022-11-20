@@ -197,13 +197,15 @@ const Items = memo(() => {
     <>
       <Header />
       <div className='h-full w-full flex justify-center'>
-        <div className='h-full w-2/3 flex flex-col justify-center'>
-          <div className='font-bold text-5xl mt-32 text-center mb-12'>SHOP</div>
+        <div className='h-full w-3/4 flex flex-col justify-center'>
+          <div className='font-bold text-4xl sm:text-5xl mt-32 text-center mb-10'>
+            SHOP
+          </div>
           <div className='flex justify-end mb-1'>
-            <Menu as='div' className='relative inline-block'>
+            <Menu as='div' className='relative inline-block z-0'>
               <div>
                 <Menu.Button className='inline-flex w-full justify-center px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-50 focus:outline-none'>
-                  인기순
+                  최근 인기순
                   <ChevronDownIcon
                     className='-mr-2 ml-1 h-5 w-5'
                     aria-hidden='true'
@@ -218,7 +220,7 @@ const Items = memo(() => {
                 leave='transition ease-in duration-75'
                 leaveFrom='transform opacity-100 scale-100'
                 leaveTo='transform opacity-0 scale-95'>
-                <Menu.Items className='absolute right-0 z-10 mt-2 w-32 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'>
+                <Menu.Items className='absolute right-0 mt-2 w-32 z-10 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'>
                   <div className='py-1'>
                     <Menu.Item>
                       {({ active }) => (
@@ -227,9 +229,9 @@ const Items = memo(() => {
                             active
                               ? 'bg-gray-100 text-gray-900'
                               : 'text-gray-700',
-                            'block w-full px-5 py-2 text-left text-sm'
+                            'block w-full px-5 py-2 text-center text-sm'
                           )}>
-                          인기순
+                          최근 인기순
                         </button>
                       )}
                     </Menu.Item>
@@ -240,7 +242,7 @@ const Items = memo(() => {
                             active
                               ? 'bg-gray-100 text-gray-900'
                               : 'text-gray-700',
-                            'block w-full px-5 py-2 text-left text-sm'
+                            'block w-full px-5 py-2 text-center text-sm'
                           )}>
                           판매가 낮은순
                         </button>
@@ -253,7 +255,7 @@ const Items = memo(() => {
                             active
                               ? 'bg-gray-100 text-gray-900'
                               : 'text-gray-700',
-                            'block w-full px-5 py-2 text-left text-sm'
+                            'block w-full px-5 py-2 text-center text-sm'
                           )}>
                           판매가 높은순
                         </button>
@@ -268,20 +270,19 @@ const Items = memo(() => {
             {itemArr.map((item) => (
               <li key={item.index} className='h-auto w-auto'>
                 <Link to={`/item/${item.index}`}>
-                  <div className='flex justify-center bg-gray-100 mb-3'>
+                  <div className='flex justify-center bg-gray-100 rounded-md mb-3'>
                     <img src={item.img} alt='img' className='h-52 w-52 p-1' />
                   </div>
-                  <div className='flex flex-col justify-center items-start w-auto px-0.5 '>
-                    <p className='text-sm font-semibold text-slate-900 mb-1'>
+                  <div className='flex flex-col justify-center items-start w-auto px-0.5'>
+                    <p className='text-sm font-semibold text-gray-900 mb-1'>
                       {item.brand}
                     </p>
                     <p className='text-gray-500 text-sm font-medium w-full mb-1'>
                       {item.name}
                     </p>
-                    <p className='text-base font-semibold'>
+                    <p className='text-base text-gray-900 font-semibold'>
                       {item.price.toLocaleString()}원
                     </p>
-                    234 231 252
                   </div>
                 </Link>
               </li>
