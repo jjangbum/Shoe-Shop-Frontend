@@ -260,7 +260,7 @@ const Cart = memo(() => {
           <Footer />
         </div>
       </div>
-      {modalState ? <OrderModal /> : null}
+      {modalState && <OrderModal />}
     </>
   );
 });

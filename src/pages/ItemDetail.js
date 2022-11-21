@@ -234,11 +234,11 @@ const ItemDetail = memo(() => {
               </span>
             </div>
             <div className='flex flex-col xl:flex-row justify-center items-center mt-10 md:border-b md:pb-16 border-neutral-300'>
-              <button className='w-full bg-teal-700 text-neutral-100 font-semibold text-base xl:text-lg max-w-[280px] py-3 rounded-lg mx-1 mb-2 xl:mb-0 hover:opacity-90 shadow-md'>
+              <button className='w-full bg-teal-700 text-neutral-100 font-semibold text-base xl:text-lg max-w-[280px] py-2.5 sm:py-3.5 rounded-lg mx-1 mb-2 xl:mb-0 hover:opacity-90 shadow-md'>
                 구매하기
               </button>
               <button
-                className='w-full bg-neutral-800 text-neutral-100 font-semibold text-base xl:text-lg max-w-[280px] py-3 rounded-lg mx-1 hover:opacity-90 shadow-md'
+                className='w-full bg-neutral-800 text-neutral-100 font-semibold text-base xl:text-lg max-w-[280px] py-2.5 sm:py-3.5 rounded-lg mx-1 hover:opacity-90 shadow-md'
                 onClick={handleModal}>
                 장바구니에 담기
               </button>
@@ -246,7 +246,7 @@ const ItemDetail = memo(() => {
           </div>
         </div>
       </div>
-      {modalState ? <CartModal handleModal={handleModal} /> : null}
+      {modalState && <CartModal handleModal={handleModal} />}
     </>
   );
 });

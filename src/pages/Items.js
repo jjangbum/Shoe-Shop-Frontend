@@ -207,7 +207,7 @@ const Items = memo(() => {
     <>
       <div className='h-full w-full flex justify-center'>
         <div className='h-full w-3/4 flex flex-col justify-center'>
-          <div className='font-bold text-4xl sm:text-5xl mt-32 text-center mb-10'>
+          <div className='font-bold text-4xl sm:text-5xl mt-32 text-center mb-10 drop-shadow-md'>
             SHOP
           </div>
           <div className='flex justify-end mb-1'>
