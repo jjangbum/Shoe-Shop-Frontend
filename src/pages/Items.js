@@ -195,7 +195,7 @@ const Items = memo(() => {
   useEffect(() => {
     const getItems = async () => {
       await axios
-        .get('localhost:3002/item')
+        .get('http://localhost:3002/item')
         .then((res) => {
           setItems(res.data);
         })
@@ -207,7 +207,7 @@ const Items = memo(() => {
     <>
       <div className='h-full w-full flex justify-center'>
         <div className='h-full w-3/4 flex flex-col justify-center'>
-          <div className='font-bold text-4xl sm:text-5xl mt-32 text-center mb-10 drop-shadow-md'>
+          <div className='text-neutral-800 font-bold text-4xl sm:text-5xl mt-32 text-center mb-10 drop-shadow-sm'>
             SHOP
           </div>
           <div className='flex justify-end mb-1'>
@@ -278,7 +278,7 @@ const Items = memo(() => {
           <ul className='w-full grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-8'>
             {items.map((item) => (
               <Link to={`/item/${item.index}`} key={item.index}>
-                <li className='h-auto w-auto rounded-md drop-shadow-md hover:bg-gray-200 hover:drop-shadow-none hover:bg-opacity-60 p-4'>
+                <li className='h-auto w-auto rounded-md drop-shadow-md hover:drop-shadow-none hover:bg-gray-200 hover:bg-opacity-60 hover:shadow-md p-4'>
                   <div className='flex justify-center bg-stone-100 rounded-md mb-3'>
                     <img src={item.img} alt='img' className='h-52 w-52 p-1' />
                   </div>

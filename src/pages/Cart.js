@@ -104,7 +104,7 @@ const Cart = memo(() => {
   const handleOrder = async () => {
     setModalState(!modalState);
     await axios
-      .post('localhost:3002/order', items)
+      .post('http://localhost:3002/order', items)
       .then((res) => {})
       .catch((err) => {
         console.log(err);
@@ -122,7 +122,7 @@ const Cart = memo(() => {
   useEffect(() => {
     const getItems = async () => {
       await axios
-        .get('localhost:3002/cart')
+        .get('http://localhost:3002/cart')
         .then((res) => {
           setItems(res.data);
         })
@@ -137,7 +137,7 @@ const Cart = memo(() => {
     <>
       <div className='h-full w-full flex flex-col justify-center items-center'>
         <div className='h-auto w-5/6 sm:w-3/4 xl:w-4/5 mt-28'>
-          <div className='drop-shadow-md'>
+          <div className='drop-shadow-sm'>
             <p className='text-3xl font-semibold text-neutral-900'>장바구니</p>
           </div>
           <div className='flex flex-col xl:flex-row h-full w-full xl:border-b border-b-neutral-300 justify-evenly items-center xl:items-start'>

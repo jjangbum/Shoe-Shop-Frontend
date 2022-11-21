@@ -198,7 +198,7 @@ const ItemDetail = memo(() => {
   useEffect(() => {
     const getItems = async () => {
       await axios
-        .get(`localhost:3002/item/${id}`)
+        .get(`http://localhost:3002/item/${id}`)
         .then((res) => {
           setItem(res.data);
         })
@@ -211,7 +211,7 @@ const ItemDetail = memo(() => {
       <div className='h-screen w-full flex justify-center'>
         <div className='h-auto w-3/4 lg:w-4/5 flex flex-col md:flex-row justify-evenly md:justify-evenly md:mt-8'>
           <div className='h-auto xl:w-5/12 flex items-center justify-center'>
-            <div className='h-[320px] w-[320px] md:h-auto md:w-auto lg:h-[480px] lg:w-[480px] 2xl:h-[520px] 2xl:w-[520px] max-h-[520px] max-w-[520px] xl:-ml-8 md:mr-8 bg-stone-100 rounded-md flex justify-center drop-shadow-md'>
+            <div className='h-[320px] w-[320px] md:h-auto md:w-auto lg:h-[480px] lg:w-[480px] 2xl:h-[500px] 2xl:w-[500px] max-h-[500px] max-w-[500px] xl:-ml-8 md:mr-8 bg-stone-100 rounded-md flex justify-center drop-shadow-md'>
               <img src={i.img} alt='img' />
             </div>
           </div>

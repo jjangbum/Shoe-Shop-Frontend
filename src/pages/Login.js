@@ -1,11 +1,12 @@
 import React, { memo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Logo from '../assets/xing.png';
 
-const Login = memo(({ handleLoggedIn }) => {
+const Login = memo(({ setLoggedIn }) => {
   const [id, setId] = useState('');
   const [pw, setIPw] = useState('');
+  const navigate = useNavigate();
 
   const handleId = (e) => {
     setId(e.target.value);
@@ -16,14 +17,23 @@ const Login = memo(({ handleLoggedIn }) => {
   // 로그인
   const handleLogin = async (e) => {
     e.preventDefault();
+    if (!id) {
+      return alert('아이디를 입력하세요.');
+    }
+    if (!pw) {
+      return alert('비밀번호를 입력하세요.');
+    }
     await axios
       .post('localhost:3002/login', { id, pw })
-      .then(() => {
-        handleLoggedIn(true);
+      .then((res) => {
+        if (res.data) {
+          setLoggedIn(true);
+          return navigate('/');
+        }
+        return alert('아이디 또는 비밀번호가 일치하지 않습니다.');
       })
-      .catch((err) => {
-        window.alert('아이디 또는 비밀번호가 일치하지 않습니다.');
-        console.log(err);
+      .catch(() => {
+        alert('아이디 또는 비밀번호가 일치하지 않습니다.');
       });
   };
 
