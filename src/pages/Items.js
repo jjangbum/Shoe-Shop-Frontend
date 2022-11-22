@@ -192,6 +192,7 @@ const Items = memo(() => {
       img: 'https://img.soldout.co.kr/items/2020/11/03/69c2ddbf-00a3-440d-8734-6e308f3d7815.png/soldout/resize/564x564/optimize',
     },
   ]);
+  const [sort, setSort] = useState('최근 인기순');
   useEffect(() => {
     const getItems = async () => {
       await axios
@@ -203,6 +204,27 @@ const Items = memo(() => {
     };
     getItems();
   }, []);
+
+  const handleSort = (e) => {
+    console.log(e);
+    switch (e.target.value) {
+      case 'popular':
+        setItems(items.sort((a, b) => a.index - b.index));
+        setSort('최근 인기순');
+        break;
+      case 'low':
+        setItems(items.sort((a, b) => a.price - b.price));
+        setSort('판매가 낮은순');
+        break;
+      case 'high':
+        setItems(items.sort((a, b) => b.price - a.price));
+        setSort('판매가 높은순');
+        break;
+      default:
+        return;
+    }
+  };
+
   return (
     <>
       <div className='h-full w-full flex justify-center'>
@@ -214,7 +236,7 @@ const Items = memo(() => {
             <Menu as='div' className='relative inline-block z-10'>
               <div>
                 <Menu.Button className='inline-flex w-full justify-center px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-50 focus:outline-none'>
-                  최근 인기순
+                  {sort}
                   <ChevronDownIcon
                     className='-mr-2 ml-1 h-5 w-5'
                     aria-hidden='true'
@@ -239,7 +261,10 @@ const Items = memo(() => {
                               ? 'bg-gray-100 text-gray-900'
                               : 'text-gray-700',
                             'block w-full px-5 py-2 text-center text-sm'
-                          )}>
+                          )}
+                          type='button'
+                          value='popular'
+                          onClick={handleSort}>
                           최근 인기순
                         </button>
                       )}
@@ -252,7 +277,10 @@ const Items = memo(() => {
                               ? 'bg-gray-100 text-gray-900'
                               : 'text-gray-700',
                             'block w-full px-5 py-2 text-center text-sm'
-                          )}>
+                          )}
+                          type='button'
+                          value='low'
+                          onClick={handleSort}>
                           판매가 낮은순
                         </button>
                       )}
@@ -265,7 +293,10 @@ const Items = memo(() => {
                               ? 'bg-gray-100 text-gray-900'
                               : 'text-gray-700',
                             'block w-full px-5 py-2 text-center text-sm'
-                          )}>
+                          )}
+                          type='button'
+                          value='high'
+                          onClick={handleSort}>
                           판매가 높은순
                         </button>
                       )}
