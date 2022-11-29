@@ -24,11 +24,15 @@ const Login = memo(({ setLoggedIn }) => {
       return alert('비밀번호를 입력하세요.');
     }
     await axios
-      .post('localhost:3002/login', { id, pw })
+      .post(
+        'http://localhost:3002/user/login',
+        { id, pw },
+        { withCredentials: true }
+      )
       .then((res) => {
         if (res.data) {
           setLoggedIn(true);
-          return navigate('/');
+          return navigate('/item');
         }
         return alert('아이디 또는 비밀번호가 일치하지 않습니다.');
       })

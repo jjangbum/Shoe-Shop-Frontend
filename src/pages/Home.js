@@ -27,7 +27,7 @@ const Home = memo(() => {
               src={
                 'https://cdn3d.iconscout.com/3d/premium/thumb/shoes-for-sale-6632021-5504118.png'
               }
-              alt='shopping'
+              alt='shoes'
               className='h-64 w-64 sm:h-72 sm:w-72 lg:h-80 lg:w-80 xl:h-auto xl:w-auto animate-bounce-slow'
             />
           </div>

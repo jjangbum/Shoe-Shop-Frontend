@@ -10,80 +10,7 @@ function classNames(...classes) {
 }
 
 const Cart = memo(() => {
-  const [items, setItems] = useState([
-    {
-      index: 1,
-      name: '나이키 덩크 로우 SP 바시티 로열 (2022)',
-      price: 179000,
-      brand: '나이키/NIKE',
-      num: 'CU1726-100',
-      type: '덩크',
-      img: 'https://img.soldout.co.kr/items/2022/11/07/6cf7c767-3b8c-4b47-9592-e7511384c2cb.png/soldout/resize/564x564/optimize',
-    },
-    {
-      index: 2,
-      name: '나이키 덩크 로우 레트로 화이트 블랙',
-      price: 144000,
-      brand: '나이키/NIKE',
-      num: 'DD1391-100',
-      type: '덩크',
-      img: 'https://img.soldout.co.kr/items/2022/11/04/a8844295-e714-4fb6-92eb-9fa7b613e94e.png/soldout/resize/564x564/optimize',
-    },
-    {
-      index: 3,
-      name: '나이키 덩크 로우 레트로 화이트 뉴트럴 그레이',
-      price: 120000,
-      brand: '나이키/NIKE',
-      num: 'DJ6188-003',
-      type: '덩크',
-      img: 'https://img.soldout.co.kr/items/2022/10/26/e107f271-b41c-4556-93dd-172fb5cca5bd.png/soldout/resize/564x564/optimize',
-    },
-    {
-      index: 5,
-      name: '나이키 덩크 하이 레트로 유니버시티 골드 블랙',
-      price: 160000,
-      brand: '나이키/NIKE',
-      num: 'DD1399-700',
-      type: '덩크',
-      img: 'https://img.soldout.co.kr/items/2022/07/08/972abad4-8bb6-41f3-b9c9-f7d95d611b8c.png/soldout/resize/564x564/optimize',
-    },
-    {
-      index: 6,
-      name: '나이키 덩크 로우 오프화이트 로트 18',
-      price: 505000,
-      brand: '나이키/NIKE',
-      num: 'DJ0950-122',
-      type: '덩크',
-      img: 'https://img.soldout.co.kr/items/2022/11/02/d15b9a83-a4b0-4f2f-9a71-9d2b829caa40.png/soldout/resize/564x564/optimize',
-    },
-    {
-      index: 7,
-      name: '나이키 LD 와플 사카이 프라그먼트 라이트 스모크 그레이',
-      price: 573500,
-      brand: '나이키/NIKE',
-      num: 'DH2684-001',
-      type: '사카이',
-      img: 'https://img.soldout.co.kr/items/2022/11/02/b22b13f8-2897-423e-b5cf-de0e173d7cc6.png/soldout/resize/564x564/optimize',
-    },
-    {
-      index: 8,
-      name: '나이키 줌 코르테즈 SP 사카이 화이트 앤 유니버시티 레드',
-      price: 244000,
-      brand: '나이키/NIKE',
-      num: 'DQ0581-100',
-      type: '사카이',
-      img: 'https://img.soldout.co.kr/items/2022/07/13/d9bb52dd-01d2-4b0f-a63d-a8944cecaa2d.png/soldout/resize/564x564/optimize',
-    },
-    {
-      index: 20,
-      name: '뉴발란스 991 MIUK 네이비 (D 스탠다드)',
-      price: 295000,
-      brand: '뉴발란스/NEW Balance',
-      num: 'M991NV',
-      type: '뉴발란스',
-      img: 'https://img.soldout.co.kr/items/2020/11/03/69c2ddbf-00a3-440d-8734-6e308f3d7815.png/soldout/resize/564x564/optimize',
-    },
-  ]);
+  const [items, setItems] = useState([]);
   const [modalState, setModalState] = useState(false);
   const sizeArr = [
     '230mm',
@@ -98,7 +25,7 @@ const Cart = memo(() => {
     (accumulator, currentValue) => accumulator + parseInt(currentValue.price),
     0
   );
-  const shipping = itemSum >= 50000 ? 0 : 3000;
+  const shipping = itemSum <= 50000 && itemSum > 0 ? 3000 : 0;
   const totalPrice = itemSum + shipping;
   // 주문하기
   const handleOrder = async () => {
@@ -113,7 +40,7 @@ const Cart = memo(() => {
   // 장바구니 삭제
   const handleRemove = async (id) => {
     await axios
-      .post('localhost:3002/cart', { id })
+      .delete(`localhost:3002/cart/${id}`)
       .then((res) => {})
       .catch((err) => {
         console.log(err);
@@ -122,7 +49,7 @@ const Cart = memo(() => {
   useEffect(() => {
     const getItems = async () => {
       await axios
-        .get('http://localhost:3002/cart')
+        .get('http://localhost:3002/cart', { withCredentials: true })
         .then((res) => {
           setItems(res.data);
         })
@@ -140,7 +67,7 @@ const Cart = memo(() => {
           <div className='drop-shadow-sm'>
             <p className='text-3xl font-semibold text-neutral-900'>장바구니</p>
           </div>
-          <div className='flex flex-col xl:flex-row h-full w-full xl:border-b border-b-neutral-300 justify-evenly items-center xl:items-start'>
+          <div className='flex flex-col xl:flex-row h-full w-full justify-evenly items-center xl:items-start'>
             <ul className='h-full w-full sm:w-4/5 xl:w-7/12 mt-10 mb-10 xl:mb-0'>
               {items.map((item) => (
                 <li
@@ -230,7 +157,6 @@ const Cart = memo(() => {
                   </div>
                 </li>
               ))}
-              <li></li>
             </ul>
             <div className='h-96 w-full sm:w-3/4 xl:w-1/4 bg-teal-700 bg-opacity-5 xl:ml-20 rounded-md flex flex-col justify-evenly p-8 shadow-md'>
               <p className='text-xl font-semibold text-neutral-900 drop-shadow-md'>

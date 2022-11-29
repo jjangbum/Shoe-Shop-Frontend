@@ -9,7 +9,7 @@ import Cart from './pages/Cart';
 import Header from './components/Header';
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   return (
     <BrowserRouter>

@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Disclosure } from '@headlessui/react';
@@ -10,7 +10,9 @@ const Header = memo(({ loggedIn, setLoggedIn }) => {
   // 로그아웃
   const handleLogout = async () => {
     await axios
-      .post('http://localhost:3002/user/logout')
+      .post('http://localhost:3002/user/logout', null, {
+        withCredentials: true,
+      })
       .then((res) => {
         if (res.data) {
           setLoggedIn(false);
@@ -21,6 +23,17 @@ const Header = memo(({ loggedIn, setLoggedIn }) => {
         console.log(err);
       });
   };
+
+  useEffect(() => {
+    const check = async () => {
+      await axios
+        .get('http://localhost:3002/user/check', { withCredentials: true })
+        .then((res) => {
+          setLoggedIn(res.data);
+        });
+    };
+    check();
+  }, []);
 
   return (
     <Disclosure>
