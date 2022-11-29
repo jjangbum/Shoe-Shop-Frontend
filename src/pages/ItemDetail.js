@@ -22,8 +22,12 @@ const ItemDetail = memo(() => {
 
   // 장바구니에 담기
   const handleModal = async () => {
-    setModalState(!modalState);
-    await axios.post('http://localhost:3002/item', {});
+    await axios
+      .post('http://localhost:3002/cart', item, { withCredentials: true })
+      .then(() => {
+        setModalState(!modalState);
+      })
+      .catch((err) => {});
   };
 
   return (
