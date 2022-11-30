@@ -27,6 +27,16 @@ const Cart = memo(() => {
   );
   const shipping = itemSum <= 50000 && itemSum > 0 ? 3000 : 0;
   const totalPrice = itemSum + shipping;
+  const getItems = async () => {
+    await axios
+      .get('http://localhost:3002/cart', { withCredentials: true })
+      .then((res) => {
+        setItems(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   // 주문하기
   const handleOrder = async () => {
     setModalState(!modalState);
@@ -40,25 +50,17 @@ const Cart = memo(() => {
   // 장바구니 삭제
   const handleRemove = async (id) => {
     await axios
-      .delete(`localhost:3002/cart/${id}`)
-      .then((res) => {})
+      .delete(`http://localhost:3002/cart/${id}`, { withCredentials: true })
+      .then((res) => {
+        getItems();
+      })
       .catch((err) => {
         console.log(err);
       });
   };
   useEffect(() => {
-    const getItems = async () => {
-      await axios
-        .get('http://localhost:3002/cart', { withCredentials: true })
-        .then((res) => {
-          setItems(res.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
     getItems();
-  }, []);
+  }, [setItems]);
 
   return (
     <>
