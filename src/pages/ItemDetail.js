@@ -21,12 +21,16 @@ const ItemDetail = memo(() => {
     getItem();
   }, []);
 
+  const handleModal = () => {
+    setModalState(!modalState);
+  };
+
   // 장바구니에 담기
-  const handleModal = async () => {
+  const handleClick = async () => {
     await axios
       .post('http://localhost:3002/cart', item, { withCredentials: true })
       .then(() => {
-        setModalState(!modalState);
+        handleModal();
       })
       .catch((err) => {});
   };
@@ -64,7 +68,7 @@ const ItemDetail = memo(() => {
               </button>
               <button
                 className='w-full bg-neutral-800 text-neutral-100 font-semibold text-base xl:text-lg max-w-[280px] py-2.5 sm:py-3.5 rounded-lg mx-1 hover:opacity-90 shadow-md'
-                onClick={handleModal}>
+                onClick={handleClick}>
                 장바구니에 담기
               </button>
             </div>
